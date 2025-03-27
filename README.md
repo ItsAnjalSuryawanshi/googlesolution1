@@ -1,95 +1,21 @@
-# googlesolution1
-#athelete management system
+This a an Athlete Management app named "VayuVenture".
 
-import React, { useState, useEffect } from 'react';
 
-function AthleteProfile() {
-    const [profileData, setProfileData] = useState({
-        name: '',
-        dob: '',
-        sport: '',
-    });
+VayuVenture : An AI-driven Athlete management app. our solution provides smarter and better ways to track performance, prevent injuries for athlete and coaches. VayuVenture is designed to bridge the gap between performance analytics and real-world training. 
 
-    const handleChange = (e) => {
-        setProfileData({ ...profileData, [e.target.name]: e.target.value });
-    };
+VayuVenture focuses on performance training, injury prevention and AI-driven insights. It provides all in one solution for tracking progress, maintaining communication between players, coaches and medical professionals, promoting less popular sports, and fitness tracking.VayuVenture provides tools for carrier development as it use AI prompt to recommend upcoming sports based on athlete skills. Provides financial planning it provides advices to athlete what to do and how to do.
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+Features :-
+Performance Tracking & AI-Driven Analytics : real-time monitoring of speed, endurance, strength, & recovery 
+Personalized Training Programs : Adaptive AI-generated workout plans tailored to athlete progress.
+Injury Prevention & Recovery Management: analytics to identify injury risks before they happen.
+Mental Wellness Tracking : Personalized diet recommendations based on training goals. Mental health tracking, stress-level monitoring, & mindfulness exercises.
+Contest Creation Dashboard to be used by all organizers from state level to national level
+Notification will go to all those who accept notifications.
+1 to 1 chat feature with experts(financial, sports related, doctors, other experienced athletes)
+Coach-Athlete Communication Portal : Seamless in-app messaging & video calls for feedback. Shared performance dashboards for real-time collaboration. 
+Smart Data Visualization & Reporting : Interactive graphs & AI-powered performance insights.
+Cloud-Based Multi-User Platform : Secure & centralized storage for all athlete data & reports
 
-        try {
-            // Send data to the backend API (e.g., /api/athletes/{athleteId} with PUT)
-            const response = await fetch('/api/athletes/123', {  // Replace 123 with actual athlete ID
-                method: 'PUT', // Or POST if creating a new profile
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer YOUR_AUTH_TOKEN' // Include auth token
-                },
-                body: JSON.stringify(profileData),
-            });
 
-            if (response.ok) {
-                console.log('Profile updated successfully');
-                // Optionally: Show a success message to the user
-            } else {
-                console.error('Failed to update profile');
-                // Optionally: Show an error message to the user
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            // Optionally: Show an error message to the user
-        }
-    };
 
-    useEffect(() => {
-        // Fetch athlete profile data on component mount (if needed)
-        // Example:
-        const fetchProfile = async () => {
-            try {
-                const response = await fetch('/api/athletes/123', { // Replace 123 with actual athlete ID
-                    headers: {
-                        'Authorization': 'Bearer YOUR_AUTH_TOKEN'
-                    }
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    setProfileData(data);
-                } else {
-                    console.error('Failed to fetch profile');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-
-        fetchProfile();
-    }, []); // Empty dependency array to run only on mount
-
-    return (
-        <div>
-            <h2>Athlete Profile</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" name="name" value={profileData.name} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob" value={profileData.dob} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="sport">Sport:</label>
-                    <select id="sport" name="sport" value={profileData.sport} onChange={handleChange}>
-                        <option value="basketball">Basketball</option>
-                        <option value="soccer">Soccer</option>
-                        <option value="tennis">Tennis</option>
-                        {/* Add more sports as needed */}
-                    </select>
-                </div>
-                <button type="submit">Save Profile</button>
-            </form>
-        </div>
-    );
-}
-
-export default AthleteProfile;
